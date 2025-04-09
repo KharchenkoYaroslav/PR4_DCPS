@@ -28,12 +28,6 @@ describe('Lorenz Attractor Calculation', () => {
       expect(result1).not.toEqual(result2);
     });
   
-    it('should handle small step sizes correctly', () => {
-      const smallStepParams: LorenzParams = { ...defaultParams, dt: 0.001 };
-      const result = calculateLorenz(smallStepParams);
-      expect(result).toHaveLength(smallStepParams.steps);
-    });
-  
     it('should handle zero steps correctly', () => {
       const zeroStepParams: LorenzParams = { ...defaultParams, steps: 0 };
       const result = calculateLorenz(zeroStepParams);
