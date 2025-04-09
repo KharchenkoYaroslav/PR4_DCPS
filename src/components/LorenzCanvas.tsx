@@ -26,8 +26,8 @@ function Axes() {
 
   useFrame(() => {
     if (ref.current) {
-      const scale = camera.position.length() / 100; // Фактора масштабу
-      ref.current.scale.set(scale, scale, scale); // Масштабуємо осі
+      const scale = camera.position.length() / 100; 
+      ref.current.scale.set(scale, scale, scale); 
     }
   });
 
