@@ -4,12 +4,12 @@ import * as THREE from 'three';
 import '../styles/LorenzCanvas.scss';
 import { useRef } from 'react';
 
-type LorenzLineProps = {
+type LorenzLineData = {
   data: [number, number, number][];
   color: string;
 };
 
-const LorenzLine: React.FC<LorenzLineProps> = ({ data, color }) => {
+const LorenzLine: React.FC<LorenzLineData> = ({ data, color }) => {
   const points = data.map((p) => new THREE.Vector3(p[0], p[1], p[2]));
   return (
     <Line
@@ -23,6 +23,7 @@ const LorenzLine: React.FC<LorenzLineProps> = ({ data, color }) => {
 function Axes() {
   const { camera } = useThree();
   const ref = useRef<THREE.Group>(null);
+  const color = '#888';
 
   useFrame(() => {
     if (ref.current) {
@@ -31,7 +32,6 @@ function Axes() {
     }
   });
 
-  const color = '#888';
 
   return (
     <group ref={ref}>
@@ -83,12 +83,7 @@ function Axes() {
   );
 }
 
-
-type LorenzCanvasProps = {
-  lines: { data: [number, number, number][]; color: string }[];
-};
-
-const LorenzCanvas: React.FC<LorenzCanvasProps> = ({ lines }) => {
+const LorenzCanvas: React.FC<{ lines: LorenzLineData[] }> = ({ lines }) => {
   return (
     <div className="lorenz-canvas-wrapper">
       <Canvas camera={{ position: [25, 25, 80], fov: 75 }}>
@@ -100,10 +95,10 @@ const LorenzCanvas: React.FC<LorenzCanvasProps> = ({ lines }) => {
             <LorenzLine key={index} data={line.data} color={line.color} />
           ))}
         </group>
-        
       </Canvas>
     </div>
   );
 };
+
 
 export default LorenzCanvas;
