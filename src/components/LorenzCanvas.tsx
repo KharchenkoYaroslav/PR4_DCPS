@@ -1,6 +1,6 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, Line, Text } from '@react-three/drei';
-import * as THREE from 'three';
+import { Vector3, Group } from 'three';
 import '../styles/LorenzCanvas.scss';
 import { useRef } from 'react';
 
@@ -10,7 +10,7 @@ type LorenzLineData = {
 };
 
 const LorenzLine: React.FC<LorenzLineData> = ({ data, color }) => {
-  const points = data.map((p) => new THREE.Vector3(p[0], p[1], p[2]));
+  const points = data.map((p) => new Vector3(p[0], p[1], p[2]));
   return (
     <Line
       points={points}
@@ -22,7 +22,7 @@ const LorenzLine: React.FC<LorenzLineData> = ({ data, color }) => {
 
 function Axes() {
   const { camera } = useThree();
-  const ref = useRef<THREE.Group>(null);
+  const ref = useRef<Group>(null);
   const color = '#888';
 
   useFrame(() => {
